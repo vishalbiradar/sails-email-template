@@ -6,19 +6,25 @@ We can customise the email template and we can send the data to the email.
 Steps are as beow:
 
 Step 1) Install required dependencies
+
 ```
 npm install sails-hook-email --save
+
 ```
 You can install nodemon for monitoring the api changes.
+
 ```
 npm install nodemon --save
+
 ```
 
 Step 2) Create email.js in config folder
 
 config/email.js
 ---------
+
 ```
+
 module.exports.email = {
   service: "Gmail",
   secure: false,
@@ -32,12 +38,14 @@ module.exports.email = {
   templateDir: "views/emailTemplates", // to send our custom email template
   testMode: false
 };
+
 ```
 
 
 Step 3) Create Mailer service class, which will actually send the mail using sails email hook.
 
 ```
+
 var Mailer = {
   sendWelcomeMail: function sendWelcomeMail(obj) {
     sails.hooks.email.send(
@@ -65,6 +73,7 @@ var Mailer = {
 
 
 module.exports = Mailer;
+
 ```
 
 Step 4) Create your custom email template inside views/emailTemplates/forgotPassword folder.  
@@ -73,19 +82,24 @@ This file contains the email template html code.
 
 views/emailTemplates/forgotPassword/html.ejs
 ---------
+
 ```
+
 <p>Dear <%=Name%>,</p>
 <p>Your password is: <%=Password%> </p>
 <br/><br/>
 <p>Best Regards,</P>
 <p>Xyz Company</p>
+
 ```
 
 Note: file name must be html.ejs only
 
 Step 5) create controller that will call the Mailer service for
 appropriate route url
+
 ```
+
 module.exports = {
   forgotPassword: function (req, res) {
         var user = {"name" : "Vishal Biradar", "email" : req.body.email, "password" : "xyzabcd@1234"};
@@ -93,23 +107,30 @@ module.exports = {
         res.json(200, {success: "Email sent successfully to " + user.email});
   }
 };
+
 ```
 Step 6) Create route in routes.js for above functionality
 
 ```
+
 'POST /forgotPassword': {controller: "ForgotPassword", action: "forgotPassword"}
+
 ```
 Step 7) Run the sails app
+
 ```
 npm start
+
 ```
 
 Step 8) verify the functionality in postman
 
 ```
+
 method type: post
 url: http://localhost:1337/forgotPassword
 body: { "email":"example@gmail.com"}
+
 ```
 
 If it is running successfully, then

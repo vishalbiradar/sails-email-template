@@ -8,7 +8,11 @@
 module.exports = {
   forgotPassword: function (req, res) {
         var user = {"name" : "Vishal Biradar", "email" : req.body.email, "password" : "xyzabcd@1234"};
-        Mailer.sendWelcomeMail(user);  // <= Here we using
-        res.json(200, {success: "Email sent successfully to " + user.email});
+        var status =  Mailer.sendWelcomeMail(user);
+        if ( status === 400) {
+          return res.json(400, {success: "Unable to send mail"});
+        } else {
+          return res.json(200, {success: "Email sent successfully to " + user.email});
+        }
   }
 };

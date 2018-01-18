@@ -1,5 +1,5 @@
 var Mailer = {
-  sendWelcomeMail: function sendWelcomeMail(obj) {
+  sendWelcomeMail: function sendWelcomeMail(obj, cb) {
     sails.hooks.email.send(
       "forgotPassword",
       {
@@ -8,14 +8,13 @@ var Mailer = {
       },
       {
         to: obj.email,
-        subject: "Recovery Password"
+        subject: "Geocloud | Password Recovery Mail"
       },
-      function(err) {
-        if(err) {
-          return 400;
-        }
-        else {
-          return 200;
+      function(err, res) {
+        if (err) {
+          return cb(err, undefined);
+        } else {
+          return cb(undefined, res);
         }
       }
     )

@@ -4,10 +4,10 @@ module.exports.email = {
   secureConnection: false,
   ignoreTLS: true,
   auth: {
-    user: "vishal.rbiradar@gmail.com",
-    pass: "77091234",
+    user: "example@gmail.com",
+    pass: "password",
   },
-  from: "vishal.rbiradar@gmail.com",
+  from: "Your Name",
   templateDir: "views/emailTemplates",
   testMode: false
 };

@@ -12,10 +12,10 @@ var Mailer = {
       },
       function(err) {
         if(err) {
-          console.log(err);
+          return 400;
         }
         else {
-          console.log("Mail Sent to ", obj.email);
+          return 200;
         }
       }
     )

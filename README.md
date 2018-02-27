@@ -7,13 +7,13 @@ Steps are as beow:
 
 Step 1) Install required dependencies
 
-```
+```sh
 npm install sails-hook-email --save
 
 ```
 You can install nodemon for monitoring the api changes.
 
-```
+```sh
 npm install nodemon --save
 
 ```
@@ -23,7 +23,7 @@ Step 2) Create email.js in config folder
 config/email.js
 ---------
 
-```
+```js
 
 module.exports.email = {
   service: "Gmail",
@@ -44,7 +44,7 @@ module.exports.email = {
 
 Step 3) Create Mailer service class, which will actually send the mail using sails email hook.
 
-```
+```js
 
 var Mailer = {
   sendWelcomeMail: function sendWelcomeMail(obj) {
@@ -83,7 +83,7 @@ This file contains the email template html code.
 views/emailTemplates/forgotPassword/html.ejs
 ---------
 
-```
+```html
 
 <p>Dear <%=Name%>,</p>
 <p>Your password is: <%=Password%> </p>
@@ -98,7 +98,7 @@ Note: file name must be html.ejs only
 Step 5) create controller that will call the Mailer service for
 appropriate route url
 
-```
+```js
 
 module.exports = {
   forgotPassword: function (req, res) {
@@ -111,21 +111,21 @@ module.exports = {
 ```
 Step 6) Create route in routes.js for above functionality
 
-```
+```js
 
 'POST /forgotPassword': {controller: "ForgotPassword", action: "forgotPassword"}
 
 ```
 Step 7) Run the sails app
 
-```
+```sh
 npm start
 
 ```
 
 Step 8) verify the functionality in postman
 
-```
+```js
 
 method type: post
 url: http://localhost:1337/forgotPassword
